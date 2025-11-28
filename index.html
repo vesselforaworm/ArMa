@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArMa</title>
+<style>
+  body {
+    font-family: 'Courier New', monospace;
+    background-color: #eceee6;
+    color: #000;
+    margin: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100vh;
+    font-size: 11.5px;
+  }
+/* Link style: default black, no underline */
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+/* keep visited links same color */
+a:visited {
+  color: #000;
+}
+
+/* general hover color (no underline by default) */
+a:hover,
+a:focus {
+  color: grey;
+  text-decoration: none;
+}
+
+/* Selected works: black, no underline, turn grey on hover (no underline) */
+.works-list li a,
+.works-list li a:visited {
+  color: #000;
+  text-decoration: none;
+}
+.works-list li:hover a,
+.works-list li a:hover {
+  color: grey;
+  text-decoration: none;
+}
+
+/* Links column: black, underline on hover if you want a visual affordance */
+.links a {
+  color: #000;
+  text-decoration: none;
+}
+.links a:hover {
+  color: grey;
+  text-decoration: underline;
+}
+
+/* Project prev/next inside columns: black, underline on hover */
+.project-section .project-column a {
+  color: #000;
+  text-decoration: none;
+}
+.project-section .project-column a:hover {
+  color: grey;
+  text-decoration: underline;
+}
+
+/* Link style: default black, no underline */
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+/* keep visited links same color */
+a:visited {
+  color: #000;
+}
+
+/* general hover color (no underline by default) */
+a:hover,
+a:focus {
+  color: grey;
+  text-decoration: none;
+}
+
+/* Selected works: black, no underline, turn grey on hover (no underline) */
+.works-list li a,
+.works-list li a:visited {
+  color: #000;
+  text-decoration: none;
+}
+.works-list li:hover a,
+.works-list li a:hover {
+  color: grey;
+  text-decoration: none;
+}
+
+/* Links column: black, underline on hover if you want a visual affordance */
+.links a {
+  color: #000;
+  text-decoration: none;
+}
+.links a:hover {
+  color: grey;
+  text-decoration: underline;
+}
+
+/* Project prev/next inside columns: black, underline on hover */
+.project-section .project-column a {
+  color: #000;
+  text-decoration: none;
+}
+.project-section .project-column a:hover {
+  color: grey;
+  text-decoration: underline;
+}
+  /* Layout Columns */
+  .top-section {
+    display: flex;
+    align-items: flex-start;
+    /* allow wrapping for smaller screens */
+    flex-wrap: wrap;
+  }
+
+  .column {
+    line-height: 1.2em;
+    box-sizing: border-box;
+    /* allow each column to have its own width via nth-child rules below */
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 100;
+    text-decoration: none;
+  }
+  
+
+  /* Desktop widths + spacing (adjust % / px to taste) */
+  .top-section .column:nth-child(1) { flex: 0 0 25%; margin-right: 62px; }
+  .top-section .column:nth-child(2) { flex: 0 0 11%; margin-right: 13px; }
+  .top-section .column:nth-child(3) { flex: 0 0 18%; margin-right: 8px; }
+  .top-section .column:nth-child(4) { flex: 0 0 15%; margin-right: 23px; }
+  .top-section .column:nth-child(5) { flex: 0 0 10%; margin-right: 26px; }
+  .top-section .column:nth-child(6) { flex: 0 0 1%; margin-right: 0; }
+
+    /* Selected Works Section */
+  .works-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .works-list li {
+   cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .works-list li:hover {
+    color: grey;
+  }
+  .works-list li {
+   cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  /* links: default black, no underline; turn grey on hover (and keep no underline) */
+  .works-list li a {
+    color: #000;
+    text-decoration: none;
+    }
+  .works-list li a:visited {
+    color: #000;
+  }
+  .works-list li:hover a,
+  .works-list li a:hover {
+    color: grey;
+    text-decoration: none;
+  }
+
+  /* Hover image container */
+  .preview-image {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    width: 460px;
+    height: auto;
+    z-index: 999;
+    pointer-events: none;
+  }
+
+  /* Links column */
+  .links a {
+    color: black;
+    text-decoration: none;
+  }
+  .links a:hover {
+    text-decoration: underline;
+  }
+
+  /* Mouse trail styling */
+  .trail-icon {
+    position: fixed;
+    pointer-events: none;
+    z-index: 50;
+    max-width: 135px;
+    height: auto;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 11.3px;
+    width: auto;
+    z-index: 100;
+   }
+
+  /* Responsive: medium screens (tablets) */
+  @media (max-width: 1200px) {
+    body { font-size: 10.5px; }
+
+    /* Tablet: slightly different widths and reduced margins */
+    .top-section .column:nth-child(1) { flex: 0 0 20%; margin-right: 36px; }
+    .top-section .column:nth-child(2) { flex: 0 0 18%; margin-right: 16px; }
+    .top-section .column:nth-child(3) { flex: 0 0 16%; margin-right: 10px; }
+    .top-section .column:nth-child(4) { flex: 0 0 18%; margin-right: 22px; }
+    .top-section .column:nth-child(5) { flex: 0 0 14%; margin-right: 12px; }
+    .top-section .column:nth-child(6) { flex: 0 0 14%; margin-right: 0; }
+
+    .preview-image { width: 340px; }
+  }
+
+  /* Responsive: small screens — two columns per row */
+  @media (max-width: 800px) {
+    body { font-size: 10px; }
+
+    .column {
+      /* two columns per row */
+      flex: 0 0 48%;
+      margin-right: 0;
+      margin-bottom: 18px;
+    }
+
+    /* clear per-column desktop margins on small screens */
+    .top-section .column:nth-child(n) { margin-right: 0; flex: 0 0 48%; }
+
+    .preview-image {
+      top: 50%;
+      width: 400px;
+    }
+
+    footer { bottom: 24px; }
+  }
+
+  
+
+ 
+ </style>
+ </head>
+<body>
+
+  <div class="top-section">
+     <!-- Intro -->
+    <div class="column">
+      <p> <a href="index.html" target="_self">HEY. I'M ARMA <br><br>
+     Multi-hyphenate creative exploring where design, storytelling, and identity converge.  
+     Based in Toronto, Ariadna (ArMa) specializes in brand identities and packaging with a multidisciplinary perspective,
+      merging strategic thinking and <br>hands-on execution.</a></p>
+    </div>
+
+    <!-- Selected Works -->
+    <div class="column">
+      <p>SELECTED WORKS</p>
+      <ul class="works-list">
+
+       <li data-image="sworks1.jpg"><a href="sworks1.html">1 Fusaro's</a></li>
+       <li data-image="sworks2.jpg"><a href="sworks2.html">2 El Can Bacan</a></li>
+       <li data-image="sworks3.jpg"><a href="sworks3.html">3 Casa Killa</a></li>
+       <li data-image="sworks4.jpg"><a href="sworks4.html">4 Seres</a></li>        
+       <li data-image="sworks5.png"><a href="sworks5.html">5 Mello</a></li>
+       <li data-image="sworks6.jpg"><a href="sworks6.html">6 Roots Magazine</a></li>
+      </ul>
+    </div>
+
+     <!-- Creative Services -->
+    <div class="column">
+      <ul class="works-list">
+      <p><br>
+       <li data-image="sworks1.jpg"><a href="sworks1.html">Identity, Stationary</a></li>
+       <li data-image="sworks2.jpg"><a href="sworks2.html">Art Direction, Identity</a></li>
+       <li data-image="sworks3.jpg"><a href="sworks3.html">Identity, Spatial Design</a></li>
+       <li data-image="sworks4.jpg"><a href="sworks4.html">Identity, Packaging</a></li>        
+       <li data-image="sworks5.png"><a href="sworks5.html">Identity, Packaging</a></li>
+       <li data-image="sworks6.jpg"><a href="sworks6.html">Type Design, Editorial</a></li>
+     </ul>
+    </div>
+
+    <!-- Creative Services -->
+    <div class="column">
+      <p>CREATIVE SERVICES<br><br>
+      Art direction<br>
+      Creative direction<br>
+      Visual Identity<br>
+      Brand Design<br>
+      Illustration<br>
+      Photography</p>
+    </div>
+
+    <!-- Archive -->
+    <div class="column">
+      <p> <a href="archive.html" target="_blank">ARCHIVE</a></p>
+    </div>
+
+    <!-- Links -->
+    <div class="column links">
+      <p>LINKS<br><br>
+      <a href="mailto:ariadnamavila@gmail.com">E-mail</a><br>
+      <a href="#">PDF Portfolio</a><br>
+     <!--<a href="https://vesselforaworm.com" target="_blank">Vesselforaworm.com</a></p>--> 
+    </div>
+  </div>
+
+
+
+  </div>
+
+   <!-- Image Preview in Center -->
+   <img id="preview-image" class="preview-image" src="" alt="Preview">
+
+  <footer>
+    ariadnamavila@gmail.com
+  </footer>
+
+<script>
+  const listItems = document.querySelectorAll('.works-list li');
+  const preview = document.getElementById('preview-image');
+
+  listItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      preview.src = item.getAttribute('data-image');
+      preview.style.display = 'block';
+    });
+    item.addEventListener('mouseleave', () => {
+      preview.style.display = 'none';
+    });
+  });
+
+  // Mouse trail animation
+  const trailImages = [
+    'trailsicons1.png',
+    'trailsicons2.png',
+    'trailsicons3.png',
+    'trailsicons4.png',
+    'trailsicons5.png',
+    'trailsicons6.png'
+  ];
+  
+  let currentIndex = 0;
+  let lastTrailTime = 0;
+  let lastMouseX = 0;
+  let lastMouseY = 0;
+  const trailDelay = 150;
+  const minDistance = 60;
+
+  // Function to check if mouse is near text columns
+  function isNearTextContent(x, y) {
+    const columns = document.querySelectorAll('.column');
+    const padding = 80; // pixel buffer around text areas
+    
+    for (let column of columns) {
+      const rect = column.getBoundingClientRect();
+      const expandedRect = {
+        left: rect.left - padding,
+        right: rect.right + padding,
+        top: rect.top - padding,
+        bottom: rect.bottom + padding
+      };
+      
+      if (x >= expandedRect.left && x <= expandedRect.right &&
+          y >= expandedRect.top && y <= expandedRect.bottom) {
+        return true;
+      }
+    }
+    
+    // Also check footer
+    const footer = document.querySelector('footer');
+    if (footer) {
+      const footerRect = footer.getBoundingClientRect();
+      const expandedFooter = {
+        left: footerRect.left - padding,
+        right: footerRect.right + padding,
+        top: footerRect.top - padding,
+        bottom: footerRect.bottom + padding
+      };
+      
+      if (x >= expandedFooter.left && x <= expandedFooter.right &&
+          y >= expandedFooter.top && y <= expandedFooter.bottom) {
+        return true;
+      }
+    }
+    
+    return false;
+  }
+
+  document.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    
+    // Don't spawn trail near text content
+    if (isNearTextContent(e.clientX, e.clientY)) return;
+    
+    // Calculate distance moved since last trail
+    const distanceMoved = Math.sqrt(
+      Math.pow(e.pageX - lastMouseX, 2) + 
+      Math.pow(e.pageY - lastMouseY, 2)
+    );
+    
+    // Only create trail if enough time has passed AND enough distance moved
+    if (now - lastTrailTime < trailDelay || distanceMoved < minDistance) return;
+    
+    lastTrailTime = now;
+    lastMouseX = e.pageX;
+    lastMouseY = e.pageY;
+
+    // Create trail element
+    const trail = document.createElement('img');
+    trail.src = trailImages[currentIndex];
+    trail.className = 'trail-icon';
+    trail.style.left = e.pageX + 'px';
+    trail.style.top = e.pageY + 'px';
+    trail.style.transform = 'translate(-50%, -50%)';
+    
+    document.body.appendChild(trail);
+
+    // Remove after delay (no fade)
+    setTimeout(() => {
+      trail.remove();
+    }, 1500);
+
+    // Move to next image in sequence
+    currentIndex = (currentIndex + 1) % trailImages.length;
+  });
+</script>
+
+</body>
+</html>

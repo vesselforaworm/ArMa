@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArMa</title>
+<style>
+  body {
+    font-family: 'Courier New', monospace;
+    background-color: #eceee6;
+    color: #000;
+    margin: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100vh;
+    font-size: 11.5px;
+  }
+/* Link style: default black, no underline */
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+/* keep visited links same color */
+a:visited {
+  color: #000;
+}
+
+/* general hover color (no underline by default) */
+a:hover,
+a:focus {
+  color: grey;
+  text-decoration: none;
+}
+
+/* Selected works: black, no underline, turn grey on hover (no underline) */
+.works-list li a,
+.works-list li a:visited {
+  color: #000;
+  text-decoration: none;
+}
+.works-list li:hover a,
+.works-list li a:hover {
+  color: grey;
+  text-decoration: none;
+}
+
+/* Links column: black, underline on hover if you want a visual affordance */
+.links a {
+  color: #000;
+  text-decoration: none;
+}
+.links a:hover {
+  color: grey;
+  text-decoration: underline;
+}
+
+/* Project prev/next inside columns: black, underline on hover */
+.project-section .project-column a {
+  color: #000;
+  text-decoration: none;
+}
+.project-section .project-column a:hover {
+  color: grey;
+  text-decoration: underline;
+}
+
+/* Link style: default black, no underline */
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+/* keep visited links same color */
+a:visited {
+  color: #000;
+}
+
+/* general hover color (no underline by default) */
+a:hover,
+a:focus {
+  color: grey;
+  text-decoration: none;
+}
+
+/* Selected works: black, no underline, turn grey on hover (no underline) */
+.works-list li a,
+.works-list li a:visited {
+  color: #000;
+  text-decoration: none;
+}
+.works-list li:hover a,
+.works-list li a:hover {
+  color: grey;
+  text-decoration: none;
+}
+
+/* Links column: black, underline on hover if you want a visual affordance */
+.links a {
+  color: #000;
+  text-decoration: none;
+}
+.links a:hover {
+  color: grey;
+  text-decoration: underline;
+}
+
+/* Project prev/next inside columns: black, underline on hover */
+.project-section .project-column a {
+  color: #000;
+  text-decoration: none;
+}
+.project-section .project-column a:hover {
+  color: grey;
+  text-decoration: underline;
+}
+  /* Layout Columns */
+  .top-section {
+    display: flex;
+    align-items: flex-start;
+    /* allow wrapping for smaller screens */
+    flex-wrap: wrap;
+  }
+
+  .column {
+    line-height: 1.2em;
+    box-sizing: border-box;
+    /* allow each column to have its own width via nth-child rules below */
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 100;
+    text-decoration: none;
+  }
+  
+
+  /* Desktop widths + spacing (adjust % / px to taste) */
+  .top-section .column:nth-child(1) { flex: 0 0 25%; margin-right: 62px; }
+  .top-section .column:nth-child(2) { flex: 0 0 11%; margin-right: 13px; }
+  .top-section .column:nth-child(3) { flex: 0 0 18%; margin-right: 8px; }
+  .top-section .column:nth-child(4) { flex: 0 0 15%; margin-right: 23px; }
+  .top-section .column:nth-child(5) { flex: 0 0 10%; margin-right: 26px; }
+  .top-section .column:nth-child(6) { flex: 0 0 1%; margin-right: 0; }
+
+    /* Selected Works Section */
+  .works-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .works-list li {
+   cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .works-list li:hover {
+    color: grey;
+  }
+  .works-list li {
+   cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  /* links: default black, no underline; turn grey on hover (and keep no underline) */
+  .works-list li a {
+    color: #000;
+    text-decoration: none;
+    }
+  .works-list li a:visited {
+    color: #000;
+  }
+  .works-list li:hover a,
+  .works-list li a:hover {
+    color: grey;
+    text-decoration: none;
+  }
+  /* make PREVIOUS / NEXT links inside the project columns non-blue and underline only on hover */
+  .project-section .project-column a {
+    color: black;
+    text-decoration: none;
+    transition: color 0.15s ease, text-decoration 0.15s ease;
+  }
+  .project-section .project-column a:hover {
+    text-decoration: underline;
+  }
+
+  /* Hover image container */
+  .preview-image {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    width: 460px;
+    height: auto;
+    z-index: 999;
+    pointer-events: none;
+  }
+
+  /* Links column */
+  .links a {
+    color: black;
+    text-decoration: none;
+  }
+  .links a:hover {
+    text-decoration: underline;
+  }
+
+ 
+
+ footer {
+    position: fixed;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 11.3px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+   }
+   
+   footer a {
+     color: #000;
+     text-decoration: none;
+     transition: color 0.3s ease;
+   }
+   
+   footer a:hover {
+     color: grey;
+     text-decoration: underline;
+   }
+
+  /* Responsive: medium screens (tablets) */
+  @media (max-width: 1200px) {
+    body { font-size: 10.5px; }
+
+    /* Tablet: slightly different widths and reduced margins */
+    .top-section .column:nth-child(1) { flex: 0 0 20%; margin-right: 36px; }
+    .top-section .column:nth-child(2) { flex: 0 0 18%; margin-right: 16px; }
+    .top-section .column:nth-child(3) { flex: 0 0 16%; margin-right: 10px; }
+    .top-section .column:nth-child(4) { flex: 0 0 18%; margin-right: 22px; }
+    .top-section .column:nth-child(5) { flex: 0 0 14%; margin-right: 12px; }
+    .top-section .column:nth-child(6) { flex: 0 0 14%; margin-right: 0; }
+
+    .preview-image { width: 340px; }
+  }
+
+  /* Responsive: small screens — two columns per row */
+  @media (max-width: 800px) {
+    body { font-size: 10px; }
+
+    .column {
+      /* two columns per row */
+      flex: 0 0 48%;
+      margin-right: 0;
+      margin-bottom: 18px;
+    }
+
+    /* clear per-column desktop margins on small screens */
+    .top-section .column:nth-child(n) { margin-right: 0; flex: 0 0 48%; }
+
+    .preview-image {
+      top: 50%;
+      width: 400px;
+    }
+
+    footer { bottom: 24px; }
+  }
+ /* Responsive: mobile — stack columns vertically */
+  @media (max-width: 480px) {
+    body { font-size: 9.5px; margin: 12px 14px; }
+
+    .top-section {
+      flex-direction: column;
+    }
+
+    .column {
+      flex: 0 0 100%;
+      margin-bottom: 12px;
+    }
+
+    .preview-image {
+      position: fixed;
+      top: 55%;
+      width: 220px;
+    }
+  }
+
+  /* add adjustable variables for project column widths & spacing */
+  :root{
+    --proj-left: 45%;    /* adjust left column width */
+    --proj-right: 42.2%;   /* adjust right column width */
+    --proj-gap-12: 56px; /* gap between column 1 and 2 — edit this */
+    --proj-top-offset: 40px; /* move project content lower */
+  }
+
+  /* Project Section (use variables above) */
+  .project-section {
+    display: flex;
+    /* use per-column margins so each gap can be different */
+    margin-top: var(--proj-top-offset);
+    align-items: flex-start;
+    box-sizing: border-box;
+    justify-content: space-between;
+  }
+
+  .project-section .project-column { box-sizing: border-box; }
+  /* set explicit widths and per-column right margins (gaps) */
+  .project-section .project-column:nth-child(1) { flex: 0 0 var(--proj-left); min-width: 180px; margin-right: var(--proj-gap-12); }
+  .project-section .project-column:nth-child(2) { flex: 0 0 var(--proj-right); min-width: 180px; margin-right: 0; margin-left: auto; }
+
+  /* responsive: stack and clear margins on narrow viewports */
+  @media (max-width: 900px) {
+    .project-section { flex-wrap: wrap; margin-top: calc(var(--proj-top-offset) / 2); }
+    .project-section .project-column { flex: 0 0 100%; margin-right: 0; }
+  }
+
+   .project-column img {
+     max-width: 100%;
+     height: auto;
+     display: block;
+     margin-bottom: 10px;
+   }
+   
+   /* Additional images below the three columns */
+   .additional-images {
+     width: 80%;
+     margin: 40px auto 0;
+     display: block;
+   }
+   
+   .additional-images img {
+     max-width: 100%;
+     height: auto;
+     display: block;
+     margin-bottom: 10px;
+   }
+ 
+   .project-nav {
+     margin-top: 20px;
+     text-align: center;
+   }
+
+   .project-nav a {
+     margin: 0 10px;
+     text-decoration: none;
+     color: black;
+     transition: color 0.3s ease;
+   }
+
+   .project-nav a:hover {
+     color: grey;
+   }
+  
+
+ 
+ </style>
+ </head>
+<body>
+
+  <div class="top-section">
+     <!-- Intro -->
+    <div class="column">
+      <p> <a href="index.html" target="_self">HEY. I'M ARMA <br><br>
+     Multi-hyphenate creative exploring where design, storytelling, and identity converge.  
+     Based in Toronto, Ariadna (ArMa) specializes in brand identities and packaging with a multidisciplinary perspective,
+      merging strategic thinking and <br>hands-on execution.</a></p>
+    </div>
+
+    <!-- Selected Works -->
+    <div class="column">
+      <p>SELECTED WORKS</p>
+      <ul class="works-list">
+
+       <li data-image="sworks1.jpg"><a href="sworks1.html">1 Fusaro's</a></li>
+       <li data-image="sworks2.jpg"><a href="sworks2.html">2 El Can Bacan</a></li>
+       <li data-image="sworks3.jpg"><a href="sworks3.html">3 Casa Killa</a></li>
+       <li data-image="sworks4.jpg"><a href="sworks4.html">4 Seres</a></li>        
+       <li data-image="sworks5.png"><a href="sworks5.html">5 Mello</a></li>
+       <li data-image="sworks6.jpg"><a href="sworks6.html">6 Roots Magazine</a></li>
+      </ul>
+    </div>
+
+     <!-- Creative Services -->
+    <div class="column">
+      <ul class="works-list">
+      <p><br>
+       <li data-image="sworks1.jpg"><a href="sworks1.html">Identity, Stationary</a></li>
+       <li data-image="sworks2.jpg"><a href="sworks2.html">Art Direction, Identity</a></li>
+       <li data-image="sworks3.jpg"><a href="sworks3.html">Identity, Spatial Design</a></li>
+       <li data-image="sworks4.jpg"><a href="sworks4.html">Identity, Packaging</a></li>        
+       <li data-image="sworks5.png"><a href="sworks5.html">Identity, Packaging</a></li>
+       <li data-image="sworks6.jpg"><a href="sworks6.html">Type Design, Editorial</a></li>
+     </ul>
+    </div>
+
+    <!-- Creative Services -->
+    <div class="column">
+      <p>CREATIVE SERVICES<br><br>
+      Art direction<br>
+      Creative direction<br>
+      Visual Identity<br>
+      Brand Design<br>
+      Illustration<br>
+      Photography</p>
+    </div>
+
+    <!-- Archive -->
+    <div class="column">
+      <p> <a href="archive.html" target="_blank">ARCHIVE</a></p>
+    </div>
+
+    <!-- Links -->
+    <div class="column links">
+      <p>LINKS<br><br>
+      <a href="mailto:ariadnamavila@gmail.com">E-mail</a><br>
+      <a href="#">PDF Portfolio</a><br>
+     <!--<a href="https://vesselforaworm.com" target="_blank">Vesselforaworm.com</a></p>--> 
+    </div>
+  </div>
+<br><br><br>
+  <!-- PROJECT CONTENT -->
+  <div class="project-section">
+    <!-- Left column -->
+    <div class="project-column">
+      <p>MELLO TEA, 2025<br><br>
+      Personal Project, Toronto<br>
+      Packaging Design / Illustration</p>
+    
+<br><br> <br><br> 
+
+
+<span style="padding-left: 30px; display: block;">
+ <br><br> PROJECT OVERVIEW <br><br>
+
+Mello is a wellness tea brand designed to bring comfort and calm to those navigating restless nights, sensitive digestion, and hormonal fluctuations. Built around Mello, a moody, relatable black cat mascot, the brand combines approachable botanical blends with personality-driven visual storytelling. <br>
+
+This project explores how illustration, tone, and thoughtful packaging architecture can transform functional wellness products into cozy, emotional rituals. <br> <br>
+
+ BRAND POSITIONING <br><br>
+
+Promise: Calming, caffeine-free botanical blends for sleep support, digestive comfort, and hormonal balance delivered with warmth, humor, and zero pretense. <br> <br>
+
+Audience: Wellness-curious women aged 20–40 with low-stimulant lifestyles; night owls, sensitive stomachs, and anyone seeking ritual over rush. <br> <br>
+
+Voice: Warm, cheeky, reassuring.  <br> <br>
+
+Differentiator: Mello herself. Unlike sterile wellness branding, this fuzzy, emotional cat reflects the messy, human experience of seeking calm. Her shifting expressions across flavors mirror the moods and needs of the people who drink the tea. <br> <br>
+
+ VISUAL IDENTITY <br><br>
+
+The Mascot <br> <br>
+
+Mello is a hand-illustrated black cat with fuzzy edges and big eyes. 
+Inspired by my own cat with very moody expressive eyes, Mello often carries an unsatisfied look.
+Her emotions shift subtly across packaging: sleepy and serene for Moon Purr, 
+while appearing more impatient and grumpy for Roasty Digest and Raspberry Ease. 
+She's the brand's emotional anchor, making wellness feel approachable and personal. <br> <br>
+
+ PRODUCT LINE <br><br>
+
+Moon Purr (Sleep) <br>
+
+Chamomile, lavender, vanilla rooibos <br>
+
+For the 2 a.m. shadow-chasers <br> <br>
+
+Roasty Digest (Gut) <br>
+
+Roasted dandelion root, chicory, cinnamon <br>
+
+For sensitive tummies and stress-eaters <br> <br>
+
+Raspberry Ease (Cycle Support) <br>
+
+Raspberry leaf, nettle, lemon balm <br>
+
+For hormone rollercoasters and balance-seekers <br> <br>
+
+DESIGN INTENT <br><br>
+
+This project challenges the clinical aesthetic dominating wellness packaging. Instead of sterile minimalism or overly earnest messaging, Mello leans into personality, humor, and emotional honesty. The illustrated cat becomes a surrogate for the user (moody, tired, seeking comfort) making the brand feel less like a product and more like a companion. <br>
+
+Every design decision, from the fuzzy edges of the illustration to the restrained color palette, supports the brand's core promise: simple blends, clean ingredients, and comfort without the buzz</p>
+   
+
+</span>
+</p>
+    </div>
+
+   <!-- Right column (images) -->
+    <div class="project-column">
+      <img src="swimages5/sws1.jpg" alt="sws1"> <br> <br> <br> 
+      <div style="width: 130px;">
+        <img src="swimages5/mellocup.gif" alt="cat animation" />
+  </div>
+    </div>
+  </div>
+
+  <!-- Additional images centered below -->
+  <div class="additional-images">
+    <img src="swimages5/sws2.png" alt="sws2">
+    <img src="swimages5/sws3.gif" alt="sws3">
+    <img src="swimages5/sws4.jpg" alt="sws4">
+    <img src="swimages5/sws5.gif" alt="sws5">
+  </div>
+   
+  
+   <br><br><br>
+  </div>
+
+   <!-- Image Preview in Center -->
+   <img id="preview-image" class="preview-image" src="" alt="Preview">
+
+  <footer>
+    <a href="sworks3.html">&lt; PREVIOUS</a>
+    <span>ariadnamavila@gmail.com</span>
+    <a href="sworks5.html">NEXT &gt;</a>
+  </footer>
+
+<script>
+  const listItems = document.querySelectorAll('.works-list li');
+  const preview = document.getElementById('preview-image');
+
+  listItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      preview.src = item.getAttribute('data-image');
+      preview.style.display = 'block';
+    });
+    item.addEventListener('mouseleave', () => {
+      preview.style.display = 'none';
+    });
+  });
+
+
+  
+  let currentIndex = 0;
+  let lastTrailTime = 0;
+  let lastMouseX = 0;
+  let lastMouseY = 0;
+  const trailDelay = 150;
+  const minDistance = 60;
+
+  
+
+
+</script>
+
+</body>
+</html>
